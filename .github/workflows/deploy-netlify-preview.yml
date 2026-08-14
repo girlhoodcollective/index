@@ -1,0 +1,20 @@
+name: Deploy preview to Netlify
+
+on:
+  push:
+    branches:
+      - claude/new-session-1arpfu
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: "2028fd0f-1185-4ba8-a4cd-5ae0c0f7803a"
+        run: npx --yes netlify-cli deploy --dir=. --prod --site="$NETLIFY_SITE_ID" --auth="$NETLIFY_AUTH_TOKEN"

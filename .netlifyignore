@@ -1,0 +1,5 @@
+# Never publish contact data or repo/CI metadata to the live site.
+consolidated_contacts.csv
+*.csv
+.github
+README.md
