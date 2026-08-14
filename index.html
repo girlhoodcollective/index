@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Village Directory — Girlhood Collective</title>
+<meta name="description" content="Girlhood Collective's Village Partnership Directory: a private partner portal and public family directory for Cincinnati's I-71 corridor family-serving specialists.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <div>
+      <h1 class="header-title">The Village Directory</h1>
+      <p class="header-subtitle">Girlhood Collective — Cincinnati's trusted network of family-serving specialists along the I-71 corridor.</p>
+    </div>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Directory view">
+    <button type="button" class="tab-button active" id="tab-b2b" role="tab" aria-selected="true" aria-controls="b2b-view">Partner Portal</button>
+    <button type="button" class="tab-button" id="tab-public" role="tab" aria-selected="false" aria-controls="public-view" tabindex="-1">Public Directory</button>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="view-section active" id="b2b-view" role="tabpanel" aria-labelledby="tab-b2b">
+    <div class="welcome-banner">
+      <div class="welcome-text">
+        <h2>Welcome back, Dr. Sarah</h2>
+        <p class="welcome-subtitle">You're part of the Village Partner Network</p>
+      </div>
+      <div class="kpi-metric">
+        <p class="kpi-number" id="kpi-count">12</p>
+        <p class="kpi-label">Active Cohort Members</p>
+      </div>
+      <div class="action-buttons">
+        <button type="button" class="btn-secondary" id="download-contact-sheet">Download Partner Contact Sheet</button>
+        <button type="button" class="btn-primary" id="open-promo-request">Submit Monthly Promo Request</button>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="partner-table">
+        <thead>
+          <tr>
+            <th>Practice &amp; Founder</th>
+            <th>Contact</th>
+            <th>Ideal Client Profile</th>
+            <th>Send Families to Me When...</th>
+            <th>I Refer Out For...</th>
+            <th>Neighborhood</th>
+          </tr>
+        </thead>
+        <tbody id="partner-table-body">
+          <!-- rendered by js/app.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer-badge">
+      <p><span class="highlight">Only 12 vetted practices per cohort</span> &bull; Max 2 per specialty<br>Designed for depth, not scale — trusted referrals, not marketplace</p>
+    </div>
+  </section>
+
+  <section class="view-section" id="public-view" role="tabpanel" aria-labelledby="tab-public" hidden>
+    <div class="search-filter-section">
+      <div class="exclusivity-seal">&check; Only 12 Vetted Practices Per Cohort</div>
+
+      <div class="search-bar">
+        <label class="visually-hidden" for="search-input">Search by keyword or provider name</label>
+        <input type="text" class="search-input" id="search-input" placeholder="Search by keyword, provider name...">
+      </div>
+
+      <div>
+        <p class="filter-heading" id="neighborhood-filter-heading">Neighborhoods</p>
+        <div class="filter-pills" id="filter-pills" role="group" aria-labelledby="neighborhood-filter-heading">
+          <!-- rendered by js/app.js -->
+        </div>
+      </div>
+
+      <div class="category-field">
+        <label for="category-select" class="filter-heading">Specialty</label>
+        <select class="category-select" id="category-select">
+          <!-- rendered by js/app.js -->
+        </select>
+      </div>
+    </div>
+
+    <p class="results-count" id="results-count" aria-live="polite"></p>
+
+    <div class="directory-grid" id="directory-grid">
+      <!-- rendered by js/app.js -->
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-overlay" id="modal-overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button type="button" class="modal-close" id="modal-close" aria-label="Close dialog">&times;</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
