@@ -428,6 +428,21 @@
   margin-bottom: var(--vp-spacing-lg);
 }
 
+.vp-form-error {
+  background: rgba(249, 113, 175, 0.12);
+  border: 1px solid var(--vp-color-peony);
+  border-radius: var(--vp-radius-sm);
+  padding: var(--vp-spacing-md);
+  font-size: 0.95rem;
+  color: var(--vp-color-navy);
+  margin-bottom: var(--vp-spacing-lg);
+}
+
+.vp-form-error a {
+  color: var(--vp-color-navy);
+  text-decoration: underline;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1199px) {

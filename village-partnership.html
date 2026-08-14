@@ -127,8 +127,14 @@
       <h2 class="vp-modal-title" id="vpModalTitle">Apply for the Village Partnership</h2>
       <p class="vp-modal-desc">Tell us about your practice. We'll review applications to ensure genuine fit within the community.</p>
 
-      <form id="vpForm">
+      <form id="vpForm" name="village-partnership-application" method="POST" data-netlify="true" netlify-honeypot="vp-bot-field">
         <p class="vp-form-confirmation" hidden>Thank you for your application. We'll be in touch soon.</p>
+        <p class="vp-form-error" hidden>Something went wrong submitting your application. Please try again, or email <a href="mailto:hello@cincinnatigirl.com">hello@cincinnatigirl.com</a> directly.</p>
+
+        <input type="hidden" name="form-name" value="village-partnership-application" />
+        <p class="vp-honeypot" hidden>
+          <label>Don't fill this out if you're human: <input name="vp-bot-field" /></label>
+        </p>
 
         <div class="vp-field">
           <label for="vpName">Your Name</label>

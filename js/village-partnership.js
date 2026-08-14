@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var closeTriggers = document.querySelectorAll("[data-vp-close-modal]");
   var form = document.getElementById("vpForm");
   var confirmation = form ? form.querySelector(".vp-form-confirmation") : null;
+  var errorMessage = form ? form.querySelector(".vp-form-error") : null;
 
   function openModal() {
     modal.classList.add("is-open");
@@ -17,6 +18,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (confirmation) {
       confirmation.hidden = true;
     }
+    if (errorMessage) {
+      errorMessage.hidden = true;
+    }
+  }
+
+  function encodeFormData(data) {
+    return Object.keys(data)
+      .map(function (key) {
+        return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+      })
+      .join("&");
   }
 
   openTriggers.forEach(function (trigger) {
@@ -44,10 +56,35 @@ document.addEventListener("DOMContentLoaded", function () {
   if (form) {
     form.addEventListener("submit", function (event) {
       event.preventDefault();
-      if (confirmation) {
-        confirmation.hidden = false;
+      if (errorMessage) {
+        errorMessage.hidden = true;
       }
-      setTimeout(closeModal, 1800);
+
+      var data = {};
+      new FormData(form).forEach(function (value, key) {
+        data[key] = value;
+      });
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeFormData(data)
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Netlify Forms submission failed: " + response.status);
+          }
+          if (confirmation) {
+            confirmation.hidden = false;
+          }
+          setTimeout(closeModal, 1800);
+        })
+        .catch(function (error) {
+          console.error(error);
+          if (errorMessage) {
+            errorMessage.hidden = false;
+          }
+        });
     });
   }
 });
