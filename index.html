@@ -424,15 +424,16 @@ form.addEventListener('submit', async (e) => {
     name: name,
     weekend: data.get('weekend'),
     budget: data.get('budget'),
-    drive: data.get('drive'),
-    submittedAt: new Date().toISOString()
+    drive: data.get('drive')
   };
 
-  const key = 'vote:' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-
   try {
-    const result = await window.storage.set(key, JSON.stringify(entry), true);
-    if (!result) throw new Error('no result');
+    const res = await fetch('/api/votes', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(entry)
+    });
+    if (!res.ok) throw new Error('save failed');
     form.style.display = 'none';
     confirmScreen.style.display = 'block';
     loadResults();
@@ -447,14 +448,10 @@ async function loadResults() {
   resultsContent.innerHTML = '<p class="empty-note">Loading...</p>';
   let votes = [];
   try {
-    const list = await window.storage.list('vote:', true);
-    const keys = (list && list.keys) || [];
-    for (const k of keys) {
-      try {
-        const rec = await window.storage.get(k, true);
-        if (rec && rec.value) votes.push(JSON.parse(rec.value));
-      } catch (e) { /* skip unreadable entry */ }
-    }
+    const res = await fetch('/api/votes');
+    if (!res.ok) throw new Error('load failed');
+    const data = await res.json();
+    votes = data.votes || [];
   } catch (e) {
     resultsContent.innerHTML = '<p class="empty-note">Results aren\'t available right now.</p>';
     return;
