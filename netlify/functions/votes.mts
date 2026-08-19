@@ -1,16 +1,24 @@
-import { getStore } from '@netlify/blobs';
+import type { Context, Config } from '@netlify/functions';
+import { getStore, getDeployStore } from '@netlify/blobs';
 
-const QUESTIONS = {
+const QUESTIONS: Record<string, string[]> = {
   weekend: ['Nov 14', 'Nov 21', 'Either one'],
   budget: ['~$300 per person', '~$500 per person', 'Either one'],
   drive: ['3 hours or less', 'Up to 6 hours', 'Either one'],
 };
 
-export default async (req) => {
-  const store = getStore('girls-trip-votes');
+function getVotesStore() {
+  if (Netlify.context?.deploy.context === 'production') {
+    return getStore('girls-trip-votes');
+  }
+  return getDeployStore('girls-trip-votes');
+}
+
+export default async (req: Request, context: Context) => {
+  const store = getVotesStore();
 
   if (req.method === 'POST') {
-    let body;
+    let body: Record<string, unknown>;
     try {
       body = await req.json();
     } catch {
@@ -21,7 +29,7 @@ export default async (req) => {
     if (!name) return jsonResponse({ error: 'Name is required' }, 400);
 
     for (const [key, options] of Object.entries(QUESTIONS)) {
-      if (!options.includes(body[key])) {
+      if (!options.includes(body[key] as string)) {
         return jsonResponse({ error: `Invalid value for ${key}` }, 400);
       }
     }
@@ -49,11 +57,11 @@ export default async (req) => {
   return jsonResponse({ error: 'Method not allowed' }, 405);
 };
 
-function jsonResponse(data, status = 200) {
+function jsonResponse(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
     headers: { 'content-type': 'application/json' },
   });
 }
 
-export const config = { path: '/api/votes' };
+export const config: Config = { path: '/api/votes' };
