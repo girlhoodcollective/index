@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girls Trip Poll</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2d3d;
+    --navy: #1e3346;
+    --gold: #c98a3e;
+    --paper: #f6f1e6;
+    --paper-2: #efe6d2;
+    --line: #d8cba8;
+    --stamp: #a13f3f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--navy);
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(255,255,255,0.04), transparent 40%),
+      radial-gradient(circle at 90% 85%, rgba(255,255,255,0.03), transparent 45%);
+    font-family: 'Karla', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 32px 16px 60px;
+  }
+  .postcard {
+    max-width: 620px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .postcard::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px dashed var(--line);
+    pointer-events: none;
+  }
+  .header {
+    padding: 40px 36px 24px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .eyebrow {
+    font-family: 'Karla', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 40px;
+    margin: 0 0 10px;
+    color: var(--navy);
+    line-height: 1.05;
+  }
+  .sub {
+    font-size: 14.5px;
+    color: #56606b;
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+  .stamp {
+    position: absolute;
+    top: 30px;
+    right: 36px;
+    width: 64px;
+    height: 78px;
+    border: 2px solid var(--stamp);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(4deg);
+    color: var(--stamp);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.2;
+    padding: 6px;
+    opacity: 0.85;
+  }
+  form { padding: 8px 36px 36px; }
+  .field {
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .field:last-of-type { border-bottom: none; }
+  .q-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 13px;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .q-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--navy);
+    margin: 0 0 4px;
+  }
+  .q-hint {
+    font-size: 13px;
+    color: #7a8291;
+    margin-bottom: 16px;
+  }
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+  .option {
+    position: relative;
+  }
+  .option input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    cursor: pointer;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .option label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 14.5px;
+    color: var(--ink);
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .option label .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .option input:checked + label {
+    border-color: var(--gold);
+    background: #fff;
+  }
+  .option input:checked + label .dot::after {
+    content: "";
+    position: absolute;
+    inset: 2.5px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .option input:focus-visible + label {
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-family: 'Karla', sans-serif;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  input[type="text"]:focus {
+    outline: 2px solid var(--navy);
+    outline-offset: 1px;
+  }
+  .submit-row { padding-top: 30px; }
+  button.submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--navy);
+    color: var(--paper);
+    border: none;
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  button.submit:hover { background: #142330; }
+  button.submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .note {
+    text-align: center;
+    font-size: 12px;
+    color: #8b93a0;
+    margin-top: 12px;
+  }
+  .confirm {
+    padding: 60px 36px;
+    text-align: center;
+  }
+  .confirm h2 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 30px;
+    color: var(--navy);
+    margin: 0 0 10px;
+  }
+  .confirm p { color: #56606b; font-size: 14.5px; }
+  .results-toggle {
+    text-align: center;
+    padding: 18px 0 6px;
+  }
+  .results-toggle button {
+    background: none;
+    border: none;
+    color: rgba(246,241,230,0.55);
+    font-family: 'Karla', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .results-toggle button:hover { color: rgba(246,241,230,0.85); }
+  .results {
+    max-width: 620px;
+    margin: 20px auto 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 28px 32px;
+    display: none;
+  }
+  .results.open { display: block; }
+  .results h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--navy);
+    margin: 0 0 18px;
+  }
+  .result-group { margin-bottom: 22px; }
+  .result-group:last-child { margin-bottom: 0; }
+  .result-group .rg-title {
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 32px;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 7px;
+  }
+  .bar-track {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    height: 16px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    background: var(--gold);
+    height: 100%;
+  }
+  .voter-list {
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: #7a8291;
+  }
+  .voter-list summary { cursor: pointer; color: var(--navy); font-weight: 700; margin-bottom: 8px; }
+  .voter-row { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .voter-row:last-child { border-bottom: none; }
+  .voter-name { font-weight: 700; color: var(--ink); }
+  .empty-note { font-size: 13px; color: #8b93a0; text-align: center; padding: 10px 0; }
+  @media (max-width: 480px) {
+    h1 { font-size: 32px; }
+    .header, form { padding-left: 22px; padding-right: 22px; }
+    .stamp { display: none; }
+    .bar-row { grid-template-columns: 100px 1fr 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="postcard" id="pollCard">
+  <div class="header">
+    <div class="stamp">GIRLS<br>TRIP<br>2026</div>
+    <div class="eyebrow">Cast your vote</div>
+    <h1>Where &amp; when<br>are we going?</h1>
+    <div class="sub">Three quick questions so we can lock in the weekend. Pick one answer for each, then submit.</div>
+  </div>
+
+  <form id="pollForm">
+    <div class="field">
+      <span class="q-num">Question 1</span>
+      <p class="q-title">Which weekend works?</p>
+      <p class="q-hint">November 2026</p>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="weekend" id="w1" value="Nov 14" required>
+          <label for="w1"><span class="dot"></span>Weekend of Nov 14</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="weekend" id="w2" value="Nov 21">
+          <label for="w2"><span class="dot"></span>Weekend of Nov 21</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="weekend" id="w3" value="Either one">
+          <label for="w3"><span class="dot"></span>Either one</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="q-num">Question 2</span>
+      <p class="q-title">Budget for accommodations</p>
+      <p class="q-hint">Total for the whole weekend, per person</p>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="budget" id="b1" value="~$300 per person" required>
+          <label for="b1"><span class="dot"></span>Around $300 per person</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="budget" id="b2" value="~$500 per person">
+          <label for="b2"><span class="dot"></span>Around $500 per person</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="budget" id="b3" value="Either one">
+          <label for="b3"><span class="dot"></span>Either one</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="q-num">Question 3</span>
+      <p class="q-title">How far are you willing to drive?</p>
+      <p class="q-hint">One way</p>
+      <div class="options">
+        <div class="option">
+          <input type="radio" name="drive" id="d1" value="3 hours or less" required>
+          <label for="d1"><span class="dot"></span>3 hours or less</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="drive" id="d2" value="Up to 6 hours">
+          <label for="d2"><span class="dot"></span>Up to 6 hours is fine</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="drive" id="d3" value="Either one">
+          <label for="d3"><span class="dot"></span>Either one</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="q-num">Your name</span>
+      <p class="q-title">Who's voting?</p>
+      <input type="text" id="voterName" placeholder="First name" required>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="submit" id="submitBtn">Submit my vote</button>
+      <p class="note" id="statusNote">Votes are saved automatically to Brittany</p>
+    </div>
+  </form>
+
+  <div class="confirm" id="confirmScreen" style="display:none;">
+    <h2>Vote's in.</h2>
+    <p>Thanks for weighing in — we'll lock in the plan once everyone's voted.</p>
+  </div>
+</div>
+
+<div class="results-toggle">
+  <button id="toggleResults" type="button">View results</button>
+</div>
+
+<div class="results" id="resultsPanel">
+  <h3>Live results</h3>
+  <div id="resultsContent"></div>
+</div>
+
+<script>
+const form = document.getElementById('pollForm');
+const submitBtn = document.getElementById('submitBtn');
+const statusNote = document.getElementById('statusNote');
+const confirmScreen = document.getElementById('confirmScreen');
+const toggleResultsBtn = document.getElementById('toggleResults');
+const resultsPanel = document.getElementById('resultsPanel');
+const resultsContent = document.getElementById('resultsContent');
+
+const QUESTIONS = [
+  { key: 'weekend', title: 'Weekend', options: ['Nov 14', 'Nov 21', 'Either one'] },
+  { key: 'budget', title: 'Budget per person', options: ['~$300 per person', '~$500 per person', 'Either one'] },
+  { key: 'drive', title: 'Drive distance', options: ['3 hours or less', 'Up to 6 hours', 'Either one'] }
+];
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Saving...';
+
+  const data = new FormData(form);
+  const name = document.getElementById('voterName').value.trim();
+  const entry = {
+    name: name,
+    weekend: data.get('weekend'),
+    budget: data.get('budget'),
+    drive: data.get('drive'),
+    submittedAt: new Date().toISOString()
+  };
+
+  const key = 'vote:' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+
+  try {
+    const result = await window.storage.set(key, JSON.stringify(entry), true);
+    if (!result) throw new Error('no result');
+    form.style.display = 'none';
+    confirmScreen.style.display = 'block';
+    loadResults();
+  } catch (err) {
+    statusNote.textContent = "Something didn't save — check your connection and try again.";
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit my vote';
+  }
+});
+
+async function loadResults() {
+  resultsContent.innerHTML = '<p class="empty-note">Loading...</p>';
+  let votes = [];
+  try {
+    const list = await window.storage.list('vote:', true);
+    const keys = (list && list.keys) || [];
+    for (const k of keys) {
+      try {
+        const rec = await window.storage.get(k, true);
+        if (rec && rec.value) votes.push(JSON.parse(rec.value));
+      } catch (e) { /* skip unreadable entry */ }
+    }
+  } catch (e) {
+    resultsContent.innerHTML = '<p class="empty-note">Results aren\'t available right now.</p>';
+    return;
+  }
+
+  if (votes.length === 0) {
+    resultsContent.innerHTML = '<p class="empty-note">No votes yet.</p>';
+    return;
+  }
+
+  let html = '';
+  QUESTIONS.forEach(q => {
+    const counts = {};
+    q.options.forEach(o => counts[o] = 0);
+    votes.forEach(v => {
+      if (counts.hasOwnProperty(v[q.key])) counts[v[q.key]]++;
+    });
+    const max = Math.max(1, ...Object.values(counts));
+    html += `<div class="result-group"><div class="rg-title">${q.title} (${votes.length} vote${votes.length === 1 ? '' : 's'})</div>`;
+    q.options.forEach(o => {
+      const c = counts[o];
+      const pct = Math.round((c / max) * 100);
+      html += `<div class="bar-row"><span>${o}</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span>${c}</span></div>`;
+    });
+    html += '</div>';
+  });
+
+  html += '<details class="voter-list"><summary>Individual responses</summary>';
+  votes
+    .sort((a, b) => new Date(a.submittedAt) - new Date(b.submittedAt))
+    .forEach(v => {
+      html += `<div class="voter-row"><span class="voter-name">${escapeHtml(v.name || 'Anonymous')}</span> — ${escapeHtml(v.weekend)} · ${escapeHtml(v.budget)} · ${escapeHtml(v.drive)}</div>`;
+    });
+  html += '</details>';
+
+  resultsContent.innerHTML = html;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+toggleResultsBtn.addEventListener('click', () => {
+  const isOpen = resultsPanel.classList.toggle('open');
+  toggleResultsBtn.textContent = isOpen ? 'Hide results' : 'View results';
+  if (isOpen) loadResults();
+});
+</script>
+
+</body>
+</html>
