@@ -172,6 +172,23 @@ a:hover { color: var(--blue); border-bottom-color: rgba(15, 95, 191, .4); }
 .name-list { display: flex; flex-direction: column; gap: 7px; font-size: 15px; }
 .band-closing { font-size: 15px; line-height: 1.7; margin: 32px 0 0; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .3); max-width: 68ch; opacity: .85; }
 
+/* Vote band (prominent, top of page) */
+.vote-band {
+  margin-top: 0;
+  border-bottom: 3px solid var(--red);
+  padding-bottom: 64px;
+}
+.on-blue-p { color: var(--white); opacity: .9; }
+.vote-form { background: var(--white); box-shadow: var(--shadow-card); }
+.status-text-on-blue { color: var(--white); }
+.vote-band .btn-primary {
+  background: var(--white);
+  color: var(--blue);
+}
+.vote-band .btn-primary:hover { background: #eaf2fc; }
+.vote-band .btn-primary:active { background: #dcebfa; }
+.vote-band .field input[type="text"]:focus { border-color: var(--blue); }
+
 /* Form */
 .panel-form { background: var(--panel); border-radius: var(--radius-lg); padding: 28px; }
 .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
@@ -253,12 +270,52 @@ a:hover { color: var(--blue); border-bottom-color: rgba(15, 95, 191, .4); }
 }
 .btn-primary:hover { background: #0d54a8; }
 .btn-primary:active { background: #0b4b96; }
+.btn-large {
+  font-size: 17px;
+  height: 52px;
+  padding: 0 32px;
+  border-radius: var(--radius-sm);
+}
 .status-text { font-size: 14px; color: var(--ink); }
 
 @media (max-width: 640px) {
-  .h1 { font-size: 48px; }
-  .h2 { font-size: 32px; }
-  .header { padding: 48px 20px 40px; }
-  .section { padding: 48px 20px 0; }
-  .band { padding: 40px 20px; }
+  .h1 { font-size: 40px; }
+  .h2 { font-size: 28px; }
+  .header { padding: 36px 18px 30px; }
+  .section { padding: 40px 18px 0; }
+  .band { padding: 32px 18px; }
+  .vote-band { padding-bottom: 40px; }
+
+  .eyebrow { margin-bottom: 14px; }
+  .body-p { font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+
+  .grid { gap: 14px; }
+  .grid-stat { gap: 20px; }
+  .grid-names { gap: 22px; margin-top: 26px; padding-top: 22px; }
+
+  .panel, .card.pad, .panel-form { padding: 18px; }
+  .card-body { padding: 18px; }
+  .card-head { padding: 16px 18px; }
+
+  .big-figure { font-size: 48px; }
+  .band-figure { font-size: 42px; }
+  .dest-name { font-size: 24px; }
+  .wishlist-link { font-size: 22px; }
+  .card-title { font-size: 28px; }
+
+  /* Bigger touch targets on the vote form */
+  .choice-row { padding: 13px 0; min-height: 44px; font-size: 16px; }
+  .choice-dot { width: 24px; height: 24px; flex: 0 0 24px; }
+  .field input[type="text"] { padding: 13px; font-size: 16px; }
+
+  .submit-row { flex-direction: column; align-items: stretch; gap: 14px; margin-top: 22px; }
+  .btn-large, .submit-row .btn-primary { width: 100%; }
+  .status-text { text-align: center; }
+}
+
+@media (max-width: 400px) {
+  .h1 { font-size: 34px; }
+  .h2 { font-size: 24px; }
+  .big-figure { font-size: 40px; }
+  .band-figure { font-size: 36px; }
 }
