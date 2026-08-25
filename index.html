@@ -26,6 +26,62 @@
   </div>
 </header>
 
+<section class="rsvp-hero" aria-labelledby="rsvp-title">
+  <div class="wrap rsvp-layout">
+    <div class="rsvp-intro">
+      <div class="eyebrow eyebrow-light">RSVP now</div>
+      <h1 class="rsvp-title" id="rsvp-title">Can you make Mom Camp?</h1>
+      <p class="rsvp-date">November 20–22, 2026</p>
+      <p class="rsvp-copy">We're planning around the weekend of November 21. Pick the option that fits your schedule so we can book the right house.</p>
+      <p class="rsvp-note">We'd ideally carpool, and group groceries will be sorted out down the road.</p>
+    </div>
+
+    <div class="rsvp-card">
+      <label class="field">
+        <span class="field-label">Your name</span>
+        <input id="rsvp-name" type="text" placeholder="First and last" autocomplete="name">
+      </label>
+
+      <div class="field-label" style="margin-bottom:14px">Choose one</div>
+      <fieldset class="choices" id="rsvp-choices">
+        <legend class="visually-hidden">Choose one</legend>
+        <label class="choice-row">
+          <input type="radio" name="choice" value="Nov 20–22, all weekend">
+          <span class="choice-dot"></span>
+          Nov 20–22, all weekend
+        </label>
+        <label class="choice-row">
+          <input type="radio" name="choice" value="Nov 20 only">
+          <span class="choice-dot"></span>
+          Nov 20 only
+        </label>
+        <label class="choice-row">
+          <input type="radio" name="choice" value="Nov 21 only">
+          <span class="choice-dot"></span>
+          Nov 21 only
+        </label>
+        <label class="choice-row">
+          <input type="radio" name="choice" value="Can no longer attend — keep me posted next time">
+          <span class="choice-dot"></span>
+          Can no longer attend — keep me posted next time
+        </label>
+      </fieldset>
+
+      <div class="rsvp-optional">
+        <label class="field">
+          <span class="field-label">Anyone we're missing? <span class="optional-label">Optional</span></span>
+          <input id="rsvp-suggest" type="text" placeholder="Name, or a few names">
+        </label>
+      </div>
+
+      <div class="submit-row">
+        <button id="rsvp-submit" type="button" class="btn-primary">Submit my RSVP</button>
+        <span id="rsvp-status" class="status-text" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <h2 class="h2" style="margin-bottom:26px">What everyone said</h2>
@@ -131,66 +187,6 @@
       </div>
     </div>
     <p class="band-closing">Headcount could reach 13 if everyone interested comes. The invite list has not been confirmed, and headcount sets the house size and the per-person cost.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="eyebrow">The plan</div>
-    <h2 class="h2" style="margin-bottom:12px">We're planning for the weekend of November 21</h2>
-    <p class="body-p">Pick the option that fits your schedule. We'd ideally carpool, and group groceries will be sorted out down the road.</p>
-
-    <div class="panel-form" style="max-width:620px">
-      <label class="field">
-        <span class="field-label">Your name</span>
-        <input id="rsvp-name" type="text" placeholder="First and last" autocomplete="name">
-      </label>
-
-      <div class="field-label" style="margin-bottom:14px">Choose one</div>
-      <fieldset class="choices" id="rsvp-choices">
-        <legend class="visually-hidden">Choose one</legend>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Nov 20–22, all weekend">
-          <span class="choice-dot"></span>
-          Nov 20–22, all weekend
-        </label>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Nov 20 only">
-          <span class="choice-dot"></span>
-          Nov 20 only
-        </label>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Nov 21 only">
-          <span class="choice-dot"></span>
-          Nov 21 only
-        </label>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Can no longer attend — keep me posted next time">
-          <span class="choice-dot"></span>
-          Can no longer attend — keep me posted next time
-        </label>
-      </fieldset>
-    </div>
-  </div>
-</section>
-
-<section class="section section-last">
-  <div class="wrap">
-    <h2 class="h2" style="margin-bottom:12px">Anyone we're missing</h2>
-    <p class="body-p">If there's someone who would really want to be here, add her name.</p>
-
-    <div class="card card-accent-top pad" style="max-width:620px">
-      <label class="field">
-        <span class="field-label">Who should we add</span>
-        <input id="rsvp-suggest" type="text" placeholder="Name, or a few names">
-      </label>
-      <p class="card-footnote-muted">Optional — leave it blank if there's no one to add.</p>
-    </div>
-
-    <div class="submit-row">
-      <button id="rsvp-submit" type="button" class="btn-primary">Submit my answer</button>
-      <span id="rsvp-status" class="status-text" role="status" aria-live="polite"></span>
-    </div>
   </div>
 </section>
 
