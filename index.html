@@ -3,133 +3,216 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mom Camp · November 2026</title>
-<meta name="description" content="Mom Camp planning page: poll results, weekend decision, destinations, and the availability form.">
+<title>Re-engaging Jenna · CYC Scenario 1</title>
+<meta name="description" content="Advancement Director interview exercise: a donor re-engagement scenario for Cincinnati Youth Collaborative, presented by Brittany Gruber.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="deck-body">
 
-<!-- Netlify form detection: static markup, present at deploy scan time -->
-<form name="mom-camp-rsvp" data-netlify="true" netlify-honeypot="bot-field" hidden>
-  <input type="text" name="name">
-  <input type="text" name="choice">
-  <input type="text" name="suggest">
-  <input type="text" name="bot-field">
-</form>
+<div class="deck-viewport" id="deckViewport">
+  <div class="deck-stage" id="deckStage">
 
-<header class="header">
-  <div class="wrap">
-    <div class="eyebrow">Mom Camp · November 2026</div>
-  </div>
-</header>
-
-<section class="band vote-band" id="vote">
-  <div class="wrap">
-    <div class="panel-form vote-form" style="max-width:620px">
-      <label class="field">
-        <span class="field-label">Your name</span>
-        <input id="rsvp-name" type="text" placeholder="First and last" autocomplete="name">
-      </label>
-
-      <div class="field-label" style="margin-bottom:14px">Choose one</div>
-      <fieldset class="choices" id="rsvp-choices">
-        <legend class="visually-hidden">Choose one</legend>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Nov 20–22, all weekend">
-          <span class="choice-dot"></span>
-          Nov 20–22, all weekend
-        </label>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Nov 20 only">
-          <span class="choice-dot"></span>
-          Nov 20 only
-        </label>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Nov 21 only">
-          <span class="choice-dot"></span>
-          Nov 21 only
-        </label>
-        <label class="choice-row">
-          <input type="radio" name="choice" value="Can no longer attend — keep me posted next time">
-          <span class="choice-dot"></span>
-          Can no longer attend — keep me posted next time
-        </label>
-      </fieldset>
-
-      <label class="field" style="margin-top:24px;margin-bottom:0">
-        <span class="field-label">Anyone we're missing</span>
-        <input id="rsvp-suggest" type="text" placeholder="Name, or a few names (optional)">
-      </label>
-    </div>
-
-    <div class="submit-row">
-      <button id="rsvp-submit" type="button" class="btn-primary btn-large">Submit my answer</button>
-      <span id="rsvp-status" class="status-text status-text-on-blue" role="status" aria-live="polite"></span>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <h2 class="h2" style="margin-bottom:12px">Sample places</h2>
-    <p class="body-p">A running Airbnb wishlist of rentals inside the drive radius. Click through to see what we're working with.</p>
-    <div class="card card-accent-top pad" style="max-width:620px">
-      <div class="panel-label" style="margin-bottom:10px">Airbnb wishlist</div>
-      <a class="wishlist-link" href="https://www.airbnb.com/wishlists/viewonly/61cec50d-bc17-425a-a82e-751dd70bba27?s=67&unique_share_id=6a70713a-de24-4fcc-bcf0-5455fc5be5d6" target="_blank" rel="noopener">View the saved rentals</a>
-      <p class="card-footnote-muted">View only, so nothing you click changes the list.</p>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <h2 class="h2 on-blue">Who's coming</h2>
-    <div class="grid grid-stat">
-      <div>
-        <div class="band-figure">10</div>
-        <div class="band-label">responded to the poll</div>
+    <section class="slide slide-title" data-notes="Scenario 1. Open by framing this as a relationship that lapsed rather than a donor who left.">
+      <div class="eyebrow eyebrow-on-dark">Scenario 1</div>
+      <h1 class="title-h1">Re-engaging Jenna</h1>
+      <div class="title-footer">
+        <div>Brittany Gruber</div>
+        <div>Cincinnati Youth Collaborative</div>
       </div>
-      <div>
-        <div class="band-figure">4</div>
-        <div class="band-label">interested, availability unconfirmed and not counted in scheduling</div>
-      </div>
-      <div>
-        <div class="band-figure">1–2</div>
-        <div class="band-label">can come one night only, and only the weekend of Nov 21</div>
-      </div>
-    </div>
-    <div class="grid grid-names">
-      <div>
-        <div class="col-label">Responded to the poll</div>
-        <div class="name-list">
-          <span>Megan Winebrenner</span>
-          <span>Linda Bennett</span>
-          <span>Lisa Comello</span>
-          <span>Lauren Niestradt</span>
-          <span>Emily Geiger Draugelis</span>
-          <span>Christy Kiko</span>
-          <span>Kris Raybourne</span>
-          <span>Laura Dwyer</span>
-          <span>Brittany Gruber</span>
-          <span>Amy Schuerman</span>
+    </section>
+
+    <section class="slide slide-light slide-pad-44" data-notes="State the assumptions out loud before anything else, then how I prepare, then what I want out of the meeting.">
+      <h2 class="headline headline-on-light">Before the coffee</h2>
+      <div class="grid-3 grid-grow">
+        <div class="col">
+          <div class="eyebrow eyebrow-blue">My assumptions</div>
+          <div class="card card-white card-list">
+            <div>Ten-year supporter</div>
+            <div>Came in through the YP board</div>
+            <div>Received only general stewardship this year</div>
+            <div>Has not yet been asked to renew</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="eyebrow eyebrow-blue">My preparation</div>
+          <div class="card card-white card-list">
+            <div>Review her full giving history</div>
+            <div>Audit every touch she received this year</div>
+            <div>Bring a one-page summary of what $5,000 funds</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="eyebrow eyebrow-blue">My goals</div>
+          <div class="card card-deep card-list card-list-loose">
+            <div>Re-engage her genuinely</div>
+            <div>Resume her giving habit</div>
+            <div>Leave her with a clear way back in</div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="col-label">Interested, availability unconfirmed</div>
-        <div class="name-list">
-          <span>Kate Broering</span>
-          <span>Kate Lee</span>
-          <span>Natalie Winters</span>
-          <span>Maria Pharo</span>
+      <div class="callout">She has not been asked this year, and she has not been thanked in a way written for her.</div>
+    </section>
+
+    <section class="slide slide-white slide-pad-44" data-notes="Warm and genuine, naming any personal connection in the first sentence. Then the five parts of the conversation.">
+      <h2 class="headline headline-on-light">How I open, and how it runs</h2>
+      <div class="pull-quote">&ldquo;Jenna, I have been looking forward to this. You found CYC through the YP board, which means someone you trusted brought you here.&rdquo;</div>
+      <div class="grid-5 grid-grow">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-label">Introduce</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-label">Catch up</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-label">Impact</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-label">Thank you</div>
+        </div>
+        <div class="step-card step-card-deep">
+          <div class="step-num step-num-gold">5</div>
+          <div class="step-label">Ask</div>
         </div>
       </div>
-    </div>
-    <p class="band-closing">Headcount could reach 13 if everyone interested comes. The invite list has not been confirmed, and headcount sets the house size and the per-person cost.</p>
+      <div class="footer-line">I thank her before I ask, so the thank you stands on its own.</div>
+    </section>
+
+    <section class="slide slide-light slide-pad-40" data-notes="Questions that get past the standard script. The YP board question is the one most people skip.">
+      <h2 class="headline headline-on-light">Questions I plan to ask</h2>
+      <div class="question-stack grid-grow">
+        <div class="question-card">&ldquo;What inspires you to give now, compared to when you started?&rdquo;</div>
+        <div class="question-card">&ldquo;Which part of our work do you find yourself telling other people about?&rdquo;</div>
+        <div class="question-card">&ldquo;What has your experience with us been like this past year?&rdquo;</div>
+        <div class="question-card question-card-deep">&ldquo;When you left the YP board, what took its place?&rdquo;</div>
+      </div>
+      <div class="footer-line">If nothing replaced it, her connection ended with her board term, and I can offer her a new one.</div>
+    </section>
+
+    <section class="slide slide-white slide-pad-40" data-notes="Ask permission to shift, invite her involvement, then make the financial request using her own words.">
+      <h2 class="headline headline-on-light">Making the request</h2>
+      <div class="grid-3 ask-grid">
+        <div class="ask-card ask-card-hairline">
+          <div class="eyebrow eyebrow-faint">Asking permission</div>
+          <div class="ask-body">&ldquo;Can I tell you what I was hoping to talk about today?&rdquo;</div>
+        </div>
+        <div class="ask-card ask-card-blue">
+          <div class="eyebrow eyebrow-blue">Involvement first</div>
+          <div class="ask-body">&ldquo;Would you consider mentoring a student yourself?&rdquo;</div>
+        </div>
+        <div class="ask-card ask-card-deep">
+          <div class="eyebrow eyebrow-gold">Then the request</div>
+          <div class="ask-body ask-body-on-dark">Renew at $5,000 this year. Revisit an increase next year.</div>
+        </div>
+      </div>
+      <div class="pull-quote pull-quote-grow">&ldquo;I would like to put your $5,000 exactly where you just told me it matters most. Can I count on you this year?&rdquo;</div>
+      <div class="footer-line">Then I stop talking and let her answer.</div>
+    </section>
+
+    <section class="slide slide-light slide-pad-44" data-notes="Four responses I have prepared: timing, a concern about CYC, giving elsewhere, and needing time to decide.">
+      <h2 class="headline headline-on-light">Responding to hesitation</h2>
+      <div class="grid-2 grid-grow">
+        <div class="objection-card">
+          <div class="objection-heading">Timing or taxes</div>
+          <div class="objection-body">Adjust the timing rather than the amount. Pledge now and pay in December, or give $417 a month.</div>
+        </div>
+        <div class="objection-card">
+          <div class="objection-heading">A concern about CYC</div>
+          <div class="objection-body">Ask for all of it, write it down, and respond in writing whether or not she gives.</div>
+        </div>
+        <div class="objection-card">
+          <div class="objection-heading">Giving elsewhere now</div>
+          <div class="objection-body">Ask what drew her there, then ask for a gift that keeps her ten-year record intact.</div>
+        </div>
+        <div class="objection-card">
+          <div class="objection-heading">&ldquo;Let me think about it&rdquo;</div>
+          <div class="objection-body">Agree, and set the follow-up date before we leave the table.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide-deep slide-pad-40" data-notes="Seven touches over the year: four seasonal, two campaign letters, and a birthday note, anchored to CYC events.">
+      <div class="row-between">
+        <h2 class="headline headline-on-dark">Seven touches a year</h2>
+        <div class="big-numeral">7</div>
+      </div>
+      <div class="grid-4 grid-grow">
+        <div class="season-card">
+          <div class="eyebrow eyebrow-gold">Fall</div>
+          <div class="season-body">Partner breakfast</div>
+        </div>
+        <div class="season-card">
+          <div class="eyebrow eyebrow-gold">Winter</div>
+          <div class="season-body">Mid-year update on her students</div>
+        </div>
+        <div class="season-card">
+          <div class="eyebrow eyebrow-gold">Spring</div>
+          <div class="season-body">Dream Makers invitation</div>
+        </div>
+        <div class="season-card">
+          <div class="eyebrow eyebrow-gold">Summer</div>
+          <div class="season-body">United &ldquo;Fore&rdquo; Youth</div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="touch-card"><strong class="gold-strong">Two</strong> campaign letters, each with a line written for her</div>
+        <div class="touch-card"><strong class="gold-strong">One</strong> birthday note, no ask attached</div>
+      </div>
+      <div class="footer-line footer-line-on-dark">Plus a handwritten note within 48 hours of the meeting.</div>
+    </section>
+
+    <section class="slide slide-white slide-pad-44" data-notes="Widen out from Jenna to the portfolio, and close on what I bring to the role.">
+      <h2 class="headline headline-on-light headline-wide">What Jenna&rsquo;s lapse tells us about the portfolio</h2>
+      <div class="grid-3 question-row">
+        <div class="portfolio-q">Which donors are we not reaching?</div>
+        <div class="portfolio-q">How do our donor numbers compare with similar organizations?</div>
+        <div class="portfolio-q">What have our failed cultivation attempts taught us?</div>
+      </div>
+      <div class="grid-4 grid-grow">
+        <div class="stat-card">
+          <div class="stat-num">5,000</div>
+          <div class="stat-caption">students</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">94%</div>
+          <div class="stat-caption">graduate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1,200</div>
+          <div class="stat-caption">volunteers</div>
+        </div>
+        <div class="stat-card stat-card-deep">
+          <div class="stat-num stat-num-gold">73&cent;</div>
+          <div class="stat-caption stat-caption-on-dark">of each dollar to programs</div>
+        </div>
+      </div>
+      <div class="callout">I bring a wide network across Cincinnati and the experience to read people well. I would run this same process for every donor at Jenna&rsquo;s level.</div>
+    </section>
+
   </div>
-</section>
+</div>
+
+<div class="deck-notes" id="deckNotes" hidden>
+  <div class="deck-notes-label">Speaker notes</div>
+  <p class="deck-notes-text" id="deckNotesText"></p>
+</div>
+
+<nav class="deck-nav" aria-label="Slide navigation">
+  <button type="button" class="nav-btn" id="prevBtn" aria-label="Previous slide">&lsaquo;</button>
+  <div class="nav-dots" id="navDots" role="tablist" aria-label="Slides"></div>
+  <button type="button" class="nav-btn" id="nextBtn" aria-label="Next slide">&rsaquo;</button>
+  <div class="nav-meta">
+    <span class="nav-count" id="navCount"></span>
+    <button type="button" class="nav-link-btn" id="notesBtn" aria-pressed="false">Notes</button>
+    <a class="nav-link-btn" href="leave-behind.html">Leave-behind &#8599;</a>
+  </div>
+</nav>
 
 <script src="js/main.js"></script>
 </body>

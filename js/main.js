@@ -1,69 +1,87 @@
 (function () {
-  var nameInput = document.getElementById('rsvp-name');
-  var suggestInput = document.getElementById('rsvp-suggest');
-  var choiceInputs = document.querySelectorAll('#rsvp-choices input[type="radio"]');
-  var submitBtn = document.getElementById('rsvp-submit');
-  var statusEl = document.getElementById('rsvp-status');
+  var stage = document.getElementById('deckStage');
+  if (!stage) return; // not the deck page
 
-  function clearStatus() {
-    statusEl.textContent = '';
-  }
+  var viewport = document.getElementById('deckViewport');
+  var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+  var dotsEl = document.getElementById('navDots');
+  var countEl = document.getElementById('navCount');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var notesBtn = document.getElementById('notesBtn');
+  var notesPanel = document.getElementById('deckNotes');
+  var notesText = document.getElementById('deckNotesText');
 
-  nameInput.addEventListener('input', clearStatus);
-  suggestInput.addEventListener('input', clearStatus);
-  choiceInputs.forEach(function (input) {
-    input.addEventListener('change', clearStatus);
+  var current = 0;
+  var notesVisible = false;
+
+  var dots = slides.map(function (slide, i) {
+    var dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', function () { goTo(i); });
+    dotsEl.appendChild(dot);
+    return dot;
   });
 
-  function selectedChoice() {
-    for (var i = 0; i < choiceInputs.length; i++) {
-      if (choiceInputs[i].checked) return choiceInputs[i].value;
-    }
-    return null;
-  }
-
-  function copyToClipboard(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text);
-    }
-    return Promise.reject(new Error('clipboard unavailable'));
-  }
-
-  submitBtn.addEventListener('click', function () {
-    var name = nameInput.value.trim();
-    var choice = selectedChoice();
-    var suggest = suggestInput.value.trim();
-
-    if (!name || !choice) {
-      statusEl.textContent = 'Add your name and pick one option first.';
-      return;
-    }
-
-    var summary = 'Mom Camp — ' + name + ': ' + choice;
-    if (suggest) summary += ' · Also invite: ' + suggest;
-
-    var body = new URLSearchParams({
-      'form-name': 'mom-camp-rsvp',
-      name: name,
-      choice: choice,
-      suggest: suggest
-    }).toString();
-
-    statusEl.textContent = 'Sending…';
-
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body
-    }).then(function (r) {
-      if (!r.ok) throw new Error('bad status');
-      statusEl.textContent = 'Got it. Thanks — your answer is in.';
-    }).catch(function () {
-      copyToClipboard(summary).then(function () {
-        statusEl.textContent = 'Submission did not go through. Your answer is copied — text it to Brittany.';
-      }, function () {
-        statusEl.textContent = 'Submission did not go through. Copy this and send it to Brittany: ' + summary;
-      });
+  function render() {
+    slides.forEach(function (slide, i) {
+      slide.classList.toggle('is-active', i === current);
     });
+    dots.forEach(function (dot, i) {
+      dot.classList.toggle('is-active', i === current);
+    });
+    countEl.textContent = (current + 1) + ' / ' + slides.length;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === slides.length - 1;
+    notesText.textContent = slides[current].getAttribute('data-notes') || '';
+  }
+
+  function goTo(index) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    render();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function scaleStage() {
+    var availW = viewport.clientWidth;
+    var availH = viewport.clientHeight;
+    var scale = Math.min(availW / 1920, availH / 1080);
+    stage.style.transform = 'scale(' + scale + ')';
+  }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  notesBtn.addEventListener('click', function () {
+    notesVisible = !notesVisible;
+    notesPanel.hidden = !notesVisible;
+    notesBtn.setAttribute('aria-pressed', String(notesVisible));
   });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      prev();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goTo(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goTo(slides.length - 1);
+    } else if (e.key === 'n' || e.key === 'N') {
+      notesBtn.click();
+    }
+  });
+
+  window.addEventListener('resize', scaleStage);
+
+  render();
+  scaleStage();
 })();
